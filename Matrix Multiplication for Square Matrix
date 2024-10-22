@@ -1,0 +1,34 @@
+# Matrix Multiplication for Square Matrix   
+def matrix_input():
+    while True:
+        try:
+            value = float(input('Enter Element: '))
+            return value
+        except ValueError:
+            print('Invalid Input! Please Enter a Real Number')           
+def matrix(n):
+    return [[matrix_input() for i in range (n)] for i in range (n)]
+       
+def matrix_multiplication(M,N):
+    MN = [[0 for i in range (matrix_dimension)] for i in range (matrix_dimension)]
+    for i in range (len(MN)):
+        for j in range (len(N)):
+            for k in range (len(N[0])):
+                MN[i][j] += M[i][k]*N[k][j]
+    return MN
+while True:
+    try:
+      matrix_dimension = int(input('Enter Dimension of Square Matrices: '))
+      if matrix_dimension < 1:
+          print('Dimension of Square Matrices Can\'t be Less Than 1.')
+          continue
+      break
+    except ValueError:
+        print('Invalid Input! Please Try Again')  
+print('For Matrix 1:')            
+matrix_1 = matrix(matrix_dimension)
+print('Matrix 1:',matrix_1)
+print('For Matrix 2:')
+matrix_2 = matrix(matrix_dimension)
+print('Matrix 2:',matrix_2)
+print(f'{matrix_1} * {matrix_2} = {matrix_multiplication(matrix_1,matrix_2)}')
