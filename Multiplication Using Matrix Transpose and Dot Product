@@ -1,0 +1,58 @@
+# Matrix Multiplication Using Matrix Transpose and Dot Product
+def matrix_input(i,j):
+    while True:
+        try:
+            value = float(input(f'Enter Element {i}-{j}: '))
+            return value
+        except ValueError:
+            print('Invalid Input! Try Again.')
+            
+def matrix_dim():
+    while True:
+        try:
+            m = int(input('Enter Number of Rows: '))
+            if m < 1:
+                print('Number of Rows cannot be less than 1.')
+                continue
+            break
+        except ValueError:
+            print('Invalid Input! Try Again.')  
+    while True:
+        try:
+            n = int(input('Enter Number of Column: '))
+            if n < 1:
+                print('Number of Column cannot be less than 1.')
+                continue
+        except ValueError:
+            print('Invalid Input! Try Again.')
+        break
+    return m,n
+
+def matrix():
+    m,n = matrix_dim()
+    return[[matrix_input(i,j) for j in range(n)] for i in range(m)]
+
+def matrix_transpose(M):
+     return [[M[i][j] for i in range(len(M))] for j in range(len(M[0]))]
+ 
+def dot_product(a,b):
+    result = 0
+    for i in range(len(a)): 
+       result += a[i]*b[i]
+    return result
+
+def matrix_multiplcation(M,N):
+    if len(M[0]) != len(N):
+        return 'Multiplication is not possible for given matrices'
+    else:
+        NT = matrix_transpose(N)
+        return [[dot_product(M[i],NT[j]) for j in range(len(NT))] for i in range(len(M))]
+    
+print('For Matrix 1')        
+matrix_1 = matrix()
+print('Matrix 1 =',matrix_1)
+print('For Matrix 2')        
+matrix_2 = matrix()
+print('Matrix 2 =',matrix_2)
+print(matrix_1,'*',matrix_2,'=') 
+print(matrix_multiplcation(matrix_1,matrix_2))
